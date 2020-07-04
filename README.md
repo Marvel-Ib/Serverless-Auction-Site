@@ -11,3 +11,5 @@ Three main services ( Microservice)
 
 ....key points   .....  (advantage of my project
 . I greatly reduce dependnecy between the services scaling each services independently of other services 
+
+``` Microservices is  achieved here through auction seevices and authorization services and notification services`` 

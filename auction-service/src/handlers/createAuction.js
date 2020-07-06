@@ -13,7 +13,7 @@ async function createAuction(event, context) {
   const now = new Date();
   const endDate = new Date();
   //// close one away later   .setDays(now.getDays() + 1)
-  endDate.setDays(now.getDay() + 1);
+  endDate.setHours(now.getHours() + 24);
   const auction = {
     id: uuid(),
     title,
@@ -38,6 +38,10 @@ async function createAuction(event, context) {
   }
   return {
     statusCode: 201,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Credentials': true,
+    },
     body: JSON.stringify(auction),
   };
 }

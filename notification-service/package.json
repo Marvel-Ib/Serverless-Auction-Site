@@ -1,5 +1,5 @@
 {
-  "name": "auction-service",
+  "name": "notification-service",
   "version": "1.0.0",
   "description": "Codingly template for Serverless Framework projects",
   "author": "Ariel Weinberger <ariel@codingly.io>",
@@ -15,15 +15,6 @@
     "webpack": "^4.35.2"
   },
   "dependencies": {
-    "@middy/core": "^1.0.0",
-    "@middy/http-cors": "^1.0.0",
-    "@middy/http-error-handler": "^1.0.0",
-    "@middy/http-event-normalizer": "^1.0.0",
-    "@middy/http-json-body-parser": "^1.0.0",
-    "@middy/validator": "^1.0.0",
-    "aws-sdk": "^2.639.0",
-    "http-errors": "^1.8.0",
-    "serverless-offline": "^6.4.0",
-    "uuid": "^8.2.0"
+    "aws-sdk": "^2.639.0"
   }
 }

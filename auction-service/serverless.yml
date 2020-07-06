@@ -15,8 +15,12 @@ provider:
   region: us-east-1
   environment:
     AUCTIONS_TABLE_NAME: ${self:custom.AuctionsTable.name}
+    MAIL_QUEUE_URL: ${self:custom.MailQueue.url}
+    AUCTIONS_BUCKET_NAME: ${self:custom.AuctionsBucket.name}
   iamRoleStatements:
       - ${file(iam/AuctionsTableIAM.yml):AuctionsTableIAM}
+      - ${file(iam/MailQueueIAM.yml):MailQueueIAM}
+      -  ${file(iam/AuctionsBucketIAM.yml):AuctionsBucketIAM}
 
 
 
@@ -25,6 +29,8 @@ provider:
 resources:
   Resources:
       AuctionsTable: ${file(resources/AuctionsTable.yml):AuctionsTable}
+      AuctionsBucket: ${file(resources/AuctionsBucket.yml):AuctionsBucket}
+      AuctionsBucketPolicy: ${file(resources/AuctionsBucket.yml):AuctionsBucketPolicy}
   
 
 
@@ -35,34 +41,59 @@ functions:
       - http:
           method: POST
           path: /auction
+          authorizer:  ${self:custom.authorizer}
+          cors: true
   getAuctions:
      handler: src/handlers/getAuctions.handler
      events:
       - http:
           method: GET
           path: /auctions
+          authorizer:  ${self:custom.authorizer}
+          cors: true
   getAuction:
      handler:  src/handlers/getAuction.handler
      events:
        - http:
             method: GET
             path: /auction/{id}
+            authorizer:  ${self:custom.authorizer}
+            cors: true
   placeBid:
       handler: src/handlers/placeBid.handler
       events:
         - http:
             method: PATCH
             path: /auction/{id}/bid
+            authorizer:  ${self:custom.authorizer}
+            cors: true
+  uploadAuctionPicture:
+      handler: src/handlers/uploadAuctionPicture.handler
+      events:
+        - http:
+            method: PATCH
+            path: /auction/{id}/picture
+            authorizer:  ${self:custom.authorizer}
+            cors: true
+
+
+    
   processAuctions:
       handler: src/handlers/processAuctions.handler
-      # events:
-      #   - schedule: rate(1 minute)
+      events:
+        - schedule: rate(360 minutes)
 
 
 
 custom:
+  authorizer: arn:aws:lambda:#{AWS::Region}:#{AWS::AccountId}:function:auth-service-${self:provider.stage}-auth
   AuctionsTable:
     name: !Ref AuctionsTable  
     arn: !GetAtt AuctionsTable.Arn
+  MailQueue:
+    arn: ${cf:notification-service-${self:provider.stage}.MailQueueArn}
+    url: ${cf:notification-service-${self:provider.stage}.MailQueueUrl}
+  AuctionsBucket:
+      name: marvel-auctions-bucket-wer234-${self:provider.stage}
   bundle:
     linting: true

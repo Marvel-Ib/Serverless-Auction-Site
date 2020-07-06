@@ -9,10 +9,11 @@ const dynamodb = new AWS.DynamoDB.DocumentClient();
 
 async function createAuction(event, context) {
   const { title } = event.body;
+  const { email } = event.requestContext.authorizer;
   const now = new Date();
   const endDate = new Date();
   //// close one away later   .setDays(now.getDays() + 1)
-  endDate.setHours(now.getHours() + 1);
+  endDate.setDays(now.getDay() + 1);
   const auction = {
     id: uuid(),
     title,
@@ -22,6 +23,7 @@ async function createAuction(event, context) {
     highestBid: {
       amount: 0,
     },
+    seller: email,
   };
   try {
     await dynamodb

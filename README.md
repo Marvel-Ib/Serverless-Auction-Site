@@ -1,5 +1,7 @@
 ## Click to see the live app:  [Serverless-Auction-Site](fervent-tereshkova-4c9adc.netlify.app)
 
+``P.S: if app is not creating or getting auctions I must have reached my AWS free tier limit``
+
 # Serverless-Auction-Site  Microservices Focused 
 
 ## About 
@@ -11,17 +13,21 @@ Abstracted the Notification service and Authentication service from the main Auc
 
 
 ## It utilizes
----- AWS Eventbridge --- AWS Dynamodb ---- AWS s3 auctions bucket ------ AWS SQS and SES
+AWS API GATEWAY---- AWS Eventbridge --- AWS Dynamodb ---- AWS S3 bucket ------ AWS SQS and SES
 #### AWS API GATEWAY 
     To create restful APIS
 #### AWS Dynamodb 
 
      To Store Information and Ensure Data Persistence 
-#### AWS s3 Bucket
+#### AWS S3 Bucket
      To enable and store image upload
  
 #### AWS SQS and SES
-    Email notification 
+    Email notification
+
+#### AWS Eventbridge
+     To Periodically check if any auction need to be closed
+  
 
 
 ## Lambda Functions

@@ -13,7 +13,11 @@ Abstracted the Notification service and Authentication service from the main Auc
 
 
 ## It utilizes
-AWS API GATEWAY---- AWS Eventbridge --- AWS Dynamodb ---- AWS S3 bucket ------ AWS SQS and SES
+Serverless Framework --- AWS API GATEWAY --- AWS Eventbridge --- AWS Dynamodb ---- AWS S3 bucket --- AWS SQS and SES
+
+#### Serverless Framework
+     To build, deploy, and maintain my serverless code
+
 #### AWS API GATEWAY 
     To create restful APIS
 #### AWS Dynamodb 

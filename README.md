@@ -33,6 +33,8 @@ AWS API GATEWAY---- AWS Eventbridge --- AWS Dynamodb ---- AWS S3 bucket ------ A
 ## Lambda Functions
  The server implementation supports GET, POST and PATCH
  
+ <img src="demo/endpoint.png">
+ 
 #### GET Request - Gets all Auctions 
 
     GET /auctions?status=CLOSED
@@ -55,10 +57,10 @@ POST Body
 
     {"title":"used Iphone"}
 
-<img src="demo/endpoint.png">
+
 
 ## FrontEnd 
-Template from the Stoic Programmer 
+Template from the Codingly.io 
 
 
 <img src="demo/front.png">

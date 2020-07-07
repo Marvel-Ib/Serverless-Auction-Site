@@ -12,7 +12,7 @@ I Had my first taste of microservice-architecture
 Abstracted the Notification service and Authentication service from the main Auction Services
 
 
-## It utilizes
+## Tech Stack
 Serverless Framework --- AWS API GATEWAY --- AWS Eventbridge --- AWS Dynamodb ---- AWS S3 bucket --- AWS SQS and SES
 
 #### Serverless Framework
